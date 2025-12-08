@@ -168,8 +168,7 @@ fun NowPlayingScreen(audioFile: AudioFile) {
                 onClick = { /* TODO: Previous */ },
                 modifier = Modifier.size(48.dp)
             ) {
-                // Using standard Material icons
-                androidx.compose.material.Icon(
+                Icon(
                     imageVector = Icons.Filled.SkipPrevious,
                     contentDescription = "Previous"
                 )
@@ -179,7 +178,7 @@ fun NowPlayingScreen(audioFile: AudioFile) {
                 onClick = { /* TODO: Play/Pause */ },
                 modifier = Modifier.size(56.dp)
             ) {
-                androidx.compose.material.Icon(
+                Icon(
                     imageVector = Icons.Filled.PlayArrow,
                     contentDescription = "Play"
                 )
@@ -189,7 +188,7 @@ fun NowPlayingScreen(audioFile: AudioFile) {
                 onClick = { /* TODO: Next */ },
                 modifier = Modifier.size(48.dp)
             ) {
-                androidx.compose.material.Icon(
+                Icon(
                     imageVector = Icons.Filled.SkipNext,
                     contentDescription = "Next"
                 )
