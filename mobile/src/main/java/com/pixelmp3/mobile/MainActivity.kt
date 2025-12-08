@@ -77,7 +77,7 @@ fun PermissionScreen(onRequestPermission: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(PaddingValues(start = 16.dp, end = 16.dp)),
+            .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.Center
     ) {
         Text(
