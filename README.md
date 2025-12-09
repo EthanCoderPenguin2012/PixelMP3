@@ -6,10 +6,14 @@ An Android MP3 player app for mobile and Wear OS, built with Jetpack Compose and
 
 ### Mobile App
 - 🎵 Beautiful Material 3 Expressive UI with Jetpack Compose
+- ✨ Fun, bouncy animations throughout the app
+- 🎨 Vibrant color scheme with purple, pink, and teal accents
 - 📱 Browse and play audio files from your device
-- 🎨 Modern, intuitive interface
+- 🎨 Modern, intuitive interface with smooth transitions
 - 📋 Playlist management
 - ⌚ Transfer audio files to Wear OS watch
+- 🌊 Staggered list animations for smooth content loading
+- 💫 Interactive press animations on buttons and cards
 
 ### Wear OS App
 - 🎧 Offline audio playback on your watch
@@ -29,6 +33,7 @@ The project is organized into three modules:
 
 - **Jetpack Compose**: Modern UI toolkit for Android
 - **Material 3**: Latest Material Design with Expressive theming
+- **Compose Animations**: Spring-based bouncy animations for delightful interactions
 - **Media3 (ExoPlayer)**: Advanced media playback
 - **Wear OS APIs**: For watch communication and data sync
 - **Kotlin**: Primary programming language
@@ -58,6 +63,19 @@ The project is organized into three modules:
 
 ## How It Works
 
+### Animation System
+
+PixelMP3 features a comprehensive animation system that makes the app feel alive and responsive:
+
+- **Bouncy Spring Animations**: Cards, buttons, and UI elements use spring physics for natural, playful movement
+- **Screen Transitions**: Smooth slide animations when navigating between tabs
+- **Staggered List Animations**: List items cascade in with a delightful delay effect
+- **Interactive Feedback**: Press animations on buttons and cards provide immediate visual feedback
+- **Loading States**: Animated loaders with bouncing dots and pulsing effects
+- **Empty States**: Pulsing icons draw attention to empty screens
+
+See [ANIMATIONS.md](ANIMATIONS.md) for detailed documentation on the animation system.
+
 ### Syncing Music to Watch
 
 1. **Select Music**: Choose songs from your mobile library
@@ -83,6 +101,9 @@ PixelMP3/
 │   └── src/main/
 │       ├── java/com/pixelmp3/mobile/
 │       │   ├── ui/        # Compose UI components
+│       │   │   ├── animations/     # Animation specs and components
+│       │   │   ├── components/     # Reusable UI components
+│       │   │   └── theme/          # Material 3 theming
 │       │   ├── service/   # Audio and Wear services
 │       │   └── MainActivity.kt
 │       └── AndroidManifest.xml
@@ -93,11 +114,12 @@ PixelMP3/
 │       │   ├── service/   # Wear services
 │       │   └── MainActivity.kt
 │       └── AndroidManifest.xml
-└── shared/                 # Shared code
-    └── src/main/
-        └── java/com/pixelmp3/shared/
-            ├── model/     # Data models
-            └── communication/ # Wear API constants
+├── shared/                 # Shared code
+│   └── src/main/
+│       └── java/com/pixelmp3/shared/
+│           ├── model/     # Data models
+│           └── communication/ # Wear API constants
+└── ANIMATIONS.md          # Animation system documentation
 ```
 
 ## License
