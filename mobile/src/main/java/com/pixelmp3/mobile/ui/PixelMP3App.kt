@@ -2,6 +2,7 @@ package com.pixelmp3.mobile.ui
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -24,6 +26,11 @@ import com.pixelmp3.mobile.ui.animations.AnimatedCard
 import com.pixelmp3.mobile.ui.animations.AnimationSpec
 import com.pixelmp3.mobile.ui.animations.SpinningIcon
 import com.pixelmp3.mobile.ui.components.BouncingDotsLoader
+import com.pixelmp3.mobile.ui.components.GradientCard
+import com.pixelmp3.mobile.ui.components.GlassmorphicCard
+import com.pixelmp3.mobile.ui.components.ShimmerEffect
+import com.pixelmp3.mobile.ui.components.BouncingBadge
+import com.pixelmp3.mobile.ui.components.ParticleEffect
 import com.pixelmp3.mobile.util.formatDuration
 import com.pixelmp3.mobile.viewmodel.AudioViewModel
 import com.pixelmp3.shared.model.AudioFile
@@ -151,21 +158,54 @@ fun MusicLibraryScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(32.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Filled.MusicNote,
-                        contentDescription = null,
-                        modifier = Modifier.size(64.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    // Pulsing icon with particle effect
+                    Box(
+                        contentAlignment = Alignment.Center
+                    ) {
+                        ParticleEffect(
+                            modifier = Modifier.size(120.dp),
+                            particleColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                            particleCount = 6
+                        )
+                        
+                        val infiniteTransition = rememberInfiniteTransition(label = "empty_pulse")
+                        val scale by infiniteTransition.animateFloat(
+                            initialValue = 1f,
+                            targetValue = 1.2f,
+                            animationSpec = infiniteRepeatable(
+                                animation = tween(1500, easing = FastOutSlowInEasing),
+                                repeatMode = RepeatMode.Reverse
+                            ),
+                            label = "empty_icon_scale"
+                        )
+                        
+                        Surface(
+                            modifier = Modifier
+                                .size(96.dp)
+                                .scale(scale),
+                            shape = MaterialTheme.shapes.extraLarge,
+                            color = MaterialTheme.colorScheme.primaryContainer,
+                            tonalElevation = 4.dp
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Icon(
+                                    imageVector = Icons.Filled.MusicNote,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(48.dp),
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(24.dp))
                     Text(
                         text = "No audio files found",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Add some music to your device",
+                        text = "Add some music to your device to get started",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -208,6 +248,7 @@ fun MusicLibraryScreen(
 @Composable
 fun AudioFileItem(audioFile: AudioFile, onPlay: () -> Unit) {
     var isPressed by remember { mutableStateOf(false) }
+    var isHovered by remember { mutableStateOf(false) }
     
     val scale by animateFloatAsState(
         targetValue = if (isPressed) 0.97f else 1f,
@@ -216,9 +257,21 @@ fun AudioFileItem(audioFile: AudioFile, onPlay: () -> Unit) {
     )
     
     val elevation by animateDpAsState(
-        targetValue = if (isPressed) 8.dp else 2.dp,
+        targetValue = if (isPressed) 8.dp else if (isHovered) 4.dp else 2.dp,
         animationSpec = AnimationSpec.bouncyDpSpring(),
         label = "item_elevation"
+    )
+    
+    // Animated gradient for the icon container
+    val infiniteTransition = rememberInfiniteTransition(label = "icon_gradient")
+    val iconGradientOffset by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(6000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "icon_gradient_offset"
     )
     
     Card(
@@ -229,7 +282,10 @@ fun AudioFileItem(audioFile: AudioFile, onPlay: () -> Unit) {
             isPressed = true
             onPlay()
         },
-        elevation = CardDefaults.cardElevation(defaultElevation = elevation)
+        elevation = CardDefaults.cardElevation(defaultElevation = elevation),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+        )
     ) {
         Row(
             modifier = Modifier
@@ -237,20 +293,34 @@ fun AudioFileItem(audioFile: AudioFile, onPlay: () -> Unit) {
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Animated music icon
+            // Animated music icon with gradient
             Surface(
                 modifier = Modifier.size(56.dp),
                 shape = MaterialTheme.shapes.medium,
-                color = MaterialTheme.colorScheme.primaryContainer
+                color = MaterialTheme.colorScheme.primaryContainer,
+                tonalElevation = 2.dp
             ) {
                 Box(
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .background(
+                            brush = Brush.radialGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.primaryContainer,
+                                    MaterialTheme.colorScheme.secondaryContainer
+                                ),
+                                center = androidx.compose.ui.geometry.Offset(
+                                    x = 28f + iconGradientOffset % 56f,
+                                    y = 28f
+                                )
+                            )
+                        )
                 ) {
                     Icon(
                         imageVector = Icons.Filled.MusicNote,
                         contentDescription = null,
                         modifier = Modifier.size(32.dp),
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -262,26 +332,42 @@ fun AudioFileItem(audioFile: AudioFile, onPlay: () -> Unit) {
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = audioFile.artist,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = formatDuration(audioFile.duration),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = audioFile.artist,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = "•",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = formatDuration(audioFile.duration),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
-            IconButton(
-                onClick = { /* TODO: More options */ }
+            
+            // Play indicator
+            Surface(
+                modifier = Modifier.size(40.dp),
+                shape = MaterialTheme.shapes.small,
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
             ) {
-                Icon(
-                    Icons.Filled.MoreVert,
-                    contentDescription = "More",
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        Icons.Filled.PlayArrow,
+                        contentDescription = "Play",
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
             }
         }
     }
@@ -320,48 +406,82 @@ fun PlaylistsScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(32.dp)
             ) {
-                // Animated pulsing icon
-                val infiniteTransition = rememberInfiniteTransition(label = "playlist_pulse")
-                
-                val scale by infiniteTransition.animateFloat(
-                    initialValue = 1f,
-                    targetValue = 1.15f,
-                    animationSpec = infiniteRepeatable(
-                        animation = tween(1500, easing = FastOutSlowInEasing),
-                        repeatMode = RepeatMode.Reverse
-                    ),
-                    label = "icon_pulse"
-                )
-                
-                Surface(
-                    modifier = Modifier
-                        .size(120.dp)
-                        .scale(scale),
-                    shape = MaterialTheme.shapes.extraLarge,
-                    color = MaterialTheme.colorScheme.primaryContainer
+                // Animated pulsing icon with gradient and particles
+                Box(
+                    contentAlignment = Alignment.Center
                 ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.PlaylistPlay,
-                            contentDescription = null,
-                            modifier = Modifier.size(64.dp),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
+                    ParticleEffect(
+                        modifier = Modifier.size(160.dp),
+                        particleColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.4f),
+                        particleCount = 8
+                    )
+                    
+                    val infiniteTransition = rememberInfiniteTransition(label = "playlist_pulse")
+                    
+                    val scale by infiniteTransition.animateFloat(
+                        initialValue = 1f,
+                        targetValue = 1.15f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(1500, easing = FastOutSlowInEasing),
+                            repeatMode = RepeatMode.Reverse
+                        ),
+                        label = "icon_pulse"
+                    )
+                    
+                    val gradientOffset by infiniteTransition.animateFloat(
+                        initialValue = 0f,
+                        targetValue = 1000f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(6000, easing = LinearEasing),
+                            repeatMode = RepeatMode.Reverse
+                        ),
+                        label = "gradient_offset"
+                    )
+                    
+                    Surface(
+                        modifier = Modifier
+                            .size(120.dp)
+                            .scale(scale),
+                        shape = MaterialTheme.shapes.extraLarge,
+                        color = Color.Transparent,
+                        tonalElevation = 6.dp
+                    ) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.background(
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.primaryContainer,
+                                        MaterialTheme.colorScheme.secondaryContainer,
+                                        MaterialTheme.colorScheme.tertiaryContainer
+                                    ),
+                                    start = androidx.compose.ui.geometry.Offset(gradientOffset, gradientOffset),
+                                    end = androidx.compose.ui.geometry.Offset(gradientOffset + 500f, gradientOffset + 500f)
+                                )
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.PlaylistPlay,
+                                contentDescription = null,
+                                modifier = Modifier.size(64.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
                     }
                 }
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                 Text(
                     text = "No playlists yet",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Create your first playlist",
+                    text = "Create your first playlist to organize your music",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(32.dp))
                 
                 var buttonPressed by remember { mutableStateOf(false) }
                 val buttonScale by animateFloatAsState(
@@ -370,16 +490,19 @@ fun PlaylistsScreen() {
                     label = "button_scale"
                 )
                 
-                FilledTonalButton(
+                Button(
                     onClick = { 
                         buttonPressed = true
                         // TODO: Create playlist
                     },
-                    modifier = Modifier.scale(buttonScale)
+                    modifier = Modifier.scale(buttonScale),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
                 ) {
                     Icon(Icons.Filled.Add, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Create Playlist")
+                    Text("Create Playlist", style = MaterialTheme.typography.titleSmall)
                 }
                 
                 LaunchedEffect(buttonPressed) {
@@ -408,7 +531,7 @@ fun WatchSyncScreen() {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Main sync card with animation
+        // Main sync card with animation and gradient
         AnimatedVisibility(
             visible = cardsVisible,
             enter = slideInVertically(
@@ -417,76 +540,74 @@ fun WatchSyncScreen() {
             ) + fadeIn(animationSpec = tween(400)),
             label = "sync_card"
         ) {
-            Card(
+            GradientCard(
                 modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                colors = listOf(
+                    MaterialTheme.colorScheme.primaryContainer,
+                    MaterialTheme.colorScheme.secondaryContainer,
+                    MaterialTheme.colorScheme.tertiaryContainer
                 )
             ) {
-                Column(
-                    modifier = Modifier.padding(20.dp)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        // Spinning watch icon
-                        SpinningIcon(
-                            icon = {
-                                Icon(
-                                    imageVector = Icons.Filled.Watch,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(56.dp),
-                                    tint = MaterialTheme.colorScheme.primary
-                                )
-                            },
-                            isSpinning = false
-                        )
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Column {
-                            Text(
-                                text = "Wear OS Sync",
-                                style = MaterialTheme.typography.titleLarge,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                    // Spinning watch icon
+                    SpinningIcon(
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Filled.Watch,
+                                contentDescription = null,
+                                modifier = Modifier.size(56.dp),
+                                tint = MaterialTheme.colorScheme.primary
                             )
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = "Transfer music to your watch",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(20.dp))
-                    
-                    var syncButtonPressed by remember { mutableStateOf(false) }
-                    val syncButtonScale by animateFloatAsState(
-                        targetValue = if (syncButtonPressed) 0.95f else 1f,
-                        animationSpec = AnimationSpec.fastBouncySpring,
-                        label = "sync_button_scale"
-                    )
-                    
-                    Button(
-                        onClick = { 
-                            syncButtonPressed = true
-                            // TODO: Start sync 
                         },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .scale(syncButtonScale),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary
+                        isSpinning = false
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Column {
+                        Text(
+                            text = "Wear OS Sync",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
-                    ) {
-                        Icon(Icons.Filled.Sync, contentDescription = null)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Sync Selected Music")
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Transfer music to your watch",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
                     }
-                    
-                    LaunchedEffect(syncButtonPressed) {
-                        if (syncButtonPressed) {
-                            delay(AnimationSpec.PRESS_ANIMATION_RESET_DELAY_MS)
-                            syncButtonPressed = false
-                        }
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                
+                var syncButtonPressed by remember { mutableStateOf(false) }
+                val syncButtonScale by animateFloatAsState(
+                    targetValue = if (syncButtonPressed) 0.95f else 1f,
+                    animationSpec = AnimationSpec.fastBouncySpring,
+                    label = "sync_button_scale"
+                )
+                
+                Button(
+                    onClick = { 
+                        syncButtonPressed = true
+                        // TODO: Start sync 
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .scale(syncButtonScale),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Icon(Icons.Filled.Sync, contentDescription = null)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Sync Selected Music")
+                }
+                
+                LaunchedEffect(syncButtonPressed) {
+                    if (syncButtonPressed) {
+                        delay(AnimationSpec.PRESS_ANIMATION_RESET_DELAY_MS)
+                        syncButtonPressed = false
                     }
                 }
             }
@@ -552,25 +673,49 @@ fun InfoCard(
         label = "info_card_elevation"
     )
     
-    Card(
+    // Animated gradient for icon
+    val infiniteTransition = rememberInfiniteTransition(label = "info_icon_gradient")
+    val iconRotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(8000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "icon_rotation"
+    )
+    
+    GlassmorphicCard(
         modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = elevation)
+        backgroundColor = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.9f)
     ) {
         Row(
             modifier = Modifier.padding(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Surface(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(56.dp),
                 shape = MaterialTheme.shapes.medium,
-                color = MaterialTheme.colorScheme.secondaryContainer
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                tonalElevation = 4.dp
             ) {
-                Box(contentAlignment = Alignment.Center) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.background(
+                        brush = Brush.sweepGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.secondaryContainer,
+                                MaterialTheme.colorScheme.tertiaryContainer,
+                                MaterialTheme.colorScheme.secondaryContainer
+                            )
+                        )
+                    )
+                ) {
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.secondary,
-                        modifier = Modifier.size(28.dp)
+                        modifier = Modifier.size(32.dp)
                     )
                 }
             }
@@ -578,7 +723,7 @@ fun InfoCard(
             Column {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleSmall,
+                    style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(4.dp))
