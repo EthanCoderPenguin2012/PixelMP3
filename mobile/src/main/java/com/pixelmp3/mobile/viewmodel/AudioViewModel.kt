@@ -1,6 +1,7 @@
 package com.pixelmp3.mobile.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.pixelmp3.mobile.data.AudioRepository
@@ -23,6 +24,9 @@ class AudioViewModel(application: Application) : AndroidViewModel(application) {
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
     
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+    
     init {
         loadAudioFiles()
     }
@@ -33,11 +37,13 @@ class AudioViewModel(application: Application) : AndroidViewModel(application) {
     fun loadAudioFiles() {
         viewModelScope.launch {
             _isLoading.value = true
+            _errorMessage.value = null
             try {
                 val files = repository.getAllAudioFiles()
                 _audioFiles.value = files
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e(TAG, "Error loading audio files", e)
+                _errorMessage.value = "Failed to load audio files"
                 _audioFiles.value = emptyList()
             } finally {
                 _isLoading.value = false
@@ -50,5 +56,9 @@ class AudioViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun refreshAudioFiles() {
         loadAudioFiles()
+    }
+    
+    companion object {
+        private const val TAG = "AudioViewModel"
     }
 }

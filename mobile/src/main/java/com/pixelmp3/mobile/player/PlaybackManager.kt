@@ -2,6 +2,8 @@ package com.pixelmp3.mobile.player
 
 import android.content.ComponentName
 import android.content.Context
+import android.net.Uri
+import androidx.core.net.toUri
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
@@ -10,6 +12,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import com.pixelmp3.mobile.service.AudioPlaybackService
 import com.pixelmp3.shared.model.AudioFile
+import java.io.File
 
 /**
  * Manager for audio playback operations
@@ -31,7 +34,11 @@ class PlaybackManager(private val context: Context) {
         controllerFuture = MediaController.Builder(context, sessionToken).buildAsync()
         controllerFuture?.addListener(
             {
-                controller = controllerFuture?.get()
+                try {
+                    controller = controllerFuture?.get()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             },
             MoreExecutors.directExecutor()
         )
@@ -42,8 +49,9 @@ class PlaybackManager(private val context: Context) {
      */
     fun play(audioFile: AudioFile) {
         controller?.let {
+            val uri = Uri.fromFile(File(audioFile.filePath))
             val mediaItem = MediaItem.Builder()
-                .setUri(audioFile.filePath)
+                .setUri(uri)
                 .setMediaId(audioFile.id)
                 .build()
             
@@ -59,8 +67,9 @@ class PlaybackManager(private val context: Context) {
     fun playList(audioFiles: List<AudioFile>, startIndex: Int = 0) {
         controller?.let {
             val mediaItems = audioFiles.map { audioFile ->
+                val uri = Uri.fromFile(File(audioFile.filePath))
                 MediaItem.Builder()
-                    .setUri(audioFile.filePath)
+                    .setUri(uri)
                     .setMediaId(audioFile.id)
                     .build()
             }
