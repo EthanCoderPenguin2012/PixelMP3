@@ -16,11 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.pixelmp3.mobile.player.PlaybackManager
 import com.pixelmp3.mobile.ui.animations.AnimatedCard
 import com.pixelmp3.mobile.ui.animations.AnimationSpec
 import com.pixelmp3.mobile.ui.animations.SpinningIcon
+import com.pixelmp3.mobile.ui.components.BouncingDotsLoader
 import com.pixelmp3.mobile.util.formatDuration
+import com.pixelmp3.mobile.viewmodel.AudioViewModel
 import com.pixelmp3.shared.model.AudioFile
 import com.pixelmp3.shared.model.PlaybackState
 import kotlinx.coroutines.delay
@@ -30,6 +35,16 @@ import kotlinx.coroutines.delay
 fun PixelMP3App() {
     var selectedTab by remember { mutableStateOf(0) }
     val tabs = listOf("Library", "Playlists", "Watch")
+    
+    val context = LocalContext.current
+    val playbackManager = remember { PlaybackManager(context) }
+    
+    DisposableEffect(Unit) {
+        playbackManager.initialize()
+        onDispose {
+            playbackManager.release()
+        }
+    }
     
     Scaffold(
         topBar = {
@@ -103,7 +118,7 @@ fun PixelMP3App() {
             label = "screen_transition"
         ) { targetTab ->
             when (targetTab) {
-                0 -> MusicLibraryScreen()
+                0 -> MusicLibraryScreen(playbackManager)
                 1 -> PlaylistsScreen()
                 2 -> WatchSyncScreen()
             }
@@ -112,47 +127,49 @@ fun PixelMP3App() {
 }
 
 @Composable
-fun MusicLibraryScreen() {
-    // Sample data for demonstration
-    val sampleAudioFiles = remember {
-        listOf(
-            AudioFile(
-                id = "1",
-                title = "Sample Song 1",
-                artist = "Sample Artist",
-                album = "Sample Album",
-                duration = 180000,
-                filePath = "/path/to/file1.mp3"
-            ),
-            AudioFile(
-                id = "2",
-                title = "Sample Song 2",
-                artist = "Another Artist",
-                album = "Another Album",
-                duration = 240000,
-                filePath = "/path/to/file2.mp3"
-            ),
-            AudioFile(
-                id = "3",
-                title = "Epic Soundtrack",
-                artist = "Composer",
-                album = "OST",
-                duration = 300000,
-                filePath = "/path/to/file3.mp3"
-            )
-        )
-    }
+fun MusicLibraryScreen(
+    playbackManager: PlaybackManager,
+    viewModel: AudioViewModel = viewModel()
+) {
+    val audioFiles by viewModel.audioFiles.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
     
     Column(modifier = Modifier.fillMaxSize()) {
-        if (sampleAudioFiles.isEmpty()) {
+        if (isLoading) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "No audio files found",
-                    style = MaterialTheme.typography.bodyLarge
-                )
+                BouncingDotsLoader()
+            }
+        } else if (audioFiles.isEmpty()) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.padding(32.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.MusicNote,
+                        contentDescription = null,
+                        modifier = Modifier.size(64.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "No audio files found",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Add some music to your device",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
         } else {
             LazyColumn(
@@ -160,7 +177,7 @@ fun MusicLibraryScreen() {
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                itemsIndexed(sampleAudioFiles) { index, audioFile ->
+                itemsIndexed(audioFiles) { index, audioFile ->
                     // Stagger animations for each item
                     var visible by remember { mutableStateOf(false) }
                     
@@ -177,7 +194,10 @@ fun MusicLibraryScreen() {
                         ) + fadeIn(animationSpec = tween(300)),
                         label = "item_$index"
                     ) {
-                        AudioFileItem(audioFile)
+                        AudioFileItem(
+                            audioFile = audioFile,
+                            onPlay = { playbackManager.play(audioFile) }
+                        )
                     }
                 }
             }
@@ -186,7 +206,7 @@ fun MusicLibraryScreen() {
 }
 
 @Composable
-fun AudioFileItem(audioFile: AudioFile) {
+fun AudioFileItem(audioFile: AudioFile, onPlay: () -> Unit) {
     var isPressed by remember { mutableStateOf(false) }
     
     val scale by animateFloatAsState(
@@ -207,7 +227,7 @@ fun AudioFileItem(audioFile: AudioFile) {
             .scale(scale),
         onClick = { 
             isPressed = true
-            // TODO: Play audio 
+            onPlay()
         },
         elevation = CardDefaults.cardElevation(defaultElevation = elevation)
     ) {
