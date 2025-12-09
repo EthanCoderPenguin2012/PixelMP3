@@ -6,7 +6,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-// Vibrant Material 3 Expressive color schemes with enhanced colors
+// Vibrant Material 3 Expressive color schemes with massively enhanced colors
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF7B5FFF),           // Vibrant purple
     onPrimary = Color(0xFFFFFFFF),
@@ -30,6 +30,7 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color(0xFF1C1B1F),
     surfaceVariant = Color(0xFFE6E0F0),
     onSurfaceVariant = Color(0xFF48454E),
+    surfaceContainerHigh = Color(0xFFF5F0FA),  // Light purple tint
     outline = Color(0xFF79747E)
 )
 
@@ -56,6 +57,7 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = Color(0xFFE6E1E5),
     surfaceVariant = Color(0xFF48454E),
     onSurfaceVariant = Color(0xFFCAC4D0),
+    surfaceContainerHigh = Color(0xFF2A2830),  // Dark purple tint
     outline = Color(0xFF938F99)
 )
 
