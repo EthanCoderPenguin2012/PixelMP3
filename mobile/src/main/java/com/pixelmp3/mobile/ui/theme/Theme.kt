@@ -70,6 +70,8 @@ fun PixelMP3Theme(
 
     MaterialTheme(
         colorScheme = colorScheme,
+        typography = ExpressiveTypography,
+        shapes = ExpressiveShapes,
         content = content
     )
 }
