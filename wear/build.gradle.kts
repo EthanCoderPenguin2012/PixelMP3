@@ -71,6 +71,8 @@ dependencies {
     implementation("androidx.wear.compose:compose-navigation:1.3.0")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material:material-icons-core")
+    implementation("androidx.compose.material:material-icons-extended")
     
     // Media
     implementation("androidx.media:media:1.7.0")

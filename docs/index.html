@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixelMP3 | Expressive Audio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050910;
+      --bg-2: #0d1a24;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --accent: #6cf0c2;
+      --accent-2: #ff835c;
+      --text: #e8f1f5;
+      --muted: #9fb3c4;
+      --border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(108, 240, 194, 0.08), transparent 30%),
+                  radial-gradient(circle at 80% 0%, rgba(255, 131, 92, 0.12), transparent 25%),
+                  linear-gradient(145deg, var(--bg), var(--bg-2));
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #041018;
+      letter-spacing: 0.5px;
+    }
+    nav {
+      display: flex;
+      gap: 16px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    nav a:hover { color: var(--accent); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      align-items: center;
+    }
+    .hero-card {
+      background: var(--card-strong);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(108, 240, 194, 0.12), transparent 35%),
+                  radial-gradient(circle at 80% 70%, rgba(255, 131, 92, 0.12), transparent 35%);
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; display: grid; gap: 18px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(108, 240, 194, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(108, 240, 194, 0.4);
+      font-weight: 600;
+      width: fit-content;
+    }
+    h1 {
+      font-size: clamp(32px, 6vw, 44px);
+      line-height: 1.08;
+      margin: 0;
+    }
+    .lede {
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #041018;
+    }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .mockup {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 10px);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+    .device {
+      position: absolute;
+      inset: 16px;
+      border-radius: 24px;
+      background: linear-gradient(160deg, rgba(108, 240, 194, 0.18), rgba(9, 25, 35, 0.9));
+      border: 1px solid rgba(108, 240, 194, 0.2);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 20px 60px rgba(0, 0, 0, 0.4);
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .section-sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 10px;
+    }
+    .pill {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--muted);
+      font-size: 12px;
+      width: fit-content;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .stat {
+      background: var(--card-strong);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .stat h3 { margin: 0 0 4px; font-size: 15px; color: var(--muted); }
+    .stat p { margin: 0; font-size: 28px; font-weight: 700; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .tile {
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius);
+      background: linear-gradient(150deg, rgba(108, 240, 194, 0.14), rgba(255, 131, 92, 0.16));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 0.6px;
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      header { flex-direction: column; gap: 12px; align-items: flex-start; }
+      nav { width: 100%; justify-content: space-between; }
+      .page { padding: 20px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="logo">PM3</div>
+        <div>
+          <strong>PixelMP3</strong><br />
+          <span style="color: var(--muted); font-size: 14px;">Expressive audio for every moment</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#design">Design</a>
+        <a href="#specs">Specs</a>
+        <a href="#cta">Get it</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-content">
+          <div class="chip">Material 3 Expressive</div>
+          <h1>Feel the music, not the interface.</h1>
+          <p class="lede">PixelMP3 blends calm, tactile surfaces with bold motion so your playlists, podcasts, and long-form audio feel alive yet effortless. Built with Material 3 expressive foundations.</p>
+          <div class="cta-row">
+            <button class="btn btn-primary">Download App</button>
+            <button class="btn btn-ghost">Watch the demo</button>
+          </div>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="device">Now Playing</div>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-title">Signature features</h2>
+      <p class="section-sub">Designed to be felt: expressive motion, adaptive color, offline-first playback.</p>
+      <div class="feature-grid">
+        <div class="card">
+          <div class="pill">Motion</div>
+          <h3>Responsive transitions</h3>
+          <p style="color: var(--muted);">Spring-driven animations mirror the tempo of your interactions for a playful yet grounded feel.</p>
+        </div>
+        <div class="card">
+          <div class="pill">Tonal</div>
+          <h3>Dynamic color</h3>
+          <p style="color: var(--muted);">Auto-generates palettes from album art so each session inherits the vibe of your music.</p>
+        </div>
+        <div class="card">
+          <div class="pill">Focus</div>
+          <h3>Minimal chrome</h3>
+          <p style="color: var(--muted);">Lightweight surfaces and typographic hierarchy keep playback controls front and center.</p>
+        </div>
+        <div class="card">
+          <div class="pill">Reach</div>
+          <h3>Wear + Mobile</h3>
+          <p style="color: var(--muted);">Seamless handoff between phone and watch with synchronized queues and progress.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="design">
+      <h2 class="section-title">Expressive look</h2>
+      <p class="section-sub">Layered depth, blurred glass, and energetic gradients deliver presence without clutter.</p>
+      <div class="gallery">
+        <div class="tile">Immersive Player</div>
+        <div class="tile">Playlist Builder</div>
+        <div class="tile">Wear OS glance</div>
+        <div class="tile">Color-adaptive UI</div>
+      </div>
+    </section>
+
+    <section id="specs">
+      <h2 class="section-title">Crafted for performance</h2>
+      <p class="section-sub">Built with Kotlin, Jetpack Compose, and Material 3 tokens for consistent behavior.</p>
+      <div class="stats">
+        <div class="stat">
+          <h3>Offline ready</h3>
+          <p>True</p>
+        </div>
+        <div class="stat">
+          <h3>Latency</h3>
+          <p>&lt; 80ms</p>
+        </div>
+        <div class="stat">
+          <h3>Battery smart</h3>
+          <p>-18%</p>
+        </div>
+        <div class="stat">
+          <h3>Platforms</h3>
+          <p>Mobile + Wear</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta">
+      <h2 class="section-title">Ready to listen differently?</h2>
+      <p class="section-sub">Join the preview and help shape the most expressive way to play your sound.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary">Get PixelMP3</button>
+        <button class="btn btn-ghost">View roadmap</button>
+      </div>
+    </section>
+
+    <footer>
+      PixelMP3 — crafted with Material 3 expressive principles.
+    </footer>
+  </div>
+</body>
+</html>

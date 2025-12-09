@@ -1,8 +1,8 @@
 package com.pixelmp3.wear.ui
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.ScalingLazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
+import androidx.wear.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier

@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.PlaylistPlay
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -71,7 +72,7 @@ fun PixelMP3App() {
                             Icon(
                                 when (index) {
                                     0 -> Icons.Filled.LibraryMusic
-                                    1 -> Icons.Filled.PlaylistPlay
+                                    1 -> Icons.AutoMirrored.Filled.PlaylistPlay
                                     else -> Icons.Filled.Watch
                                 },
                                 contentDescription = title,
@@ -321,7 +322,7 @@ fun PlaylistsScreen() {
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
-                            imageVector = Icons.Filled.PlaylistPlay,
+                            imageVector = Icons.AutoMirrored.Filled.PlaylistPlay,
                             contentDescription = null,
                             modifier = Modifier.size(64.dp),
                             tint = MaterialTheme.colorScheme.primary
