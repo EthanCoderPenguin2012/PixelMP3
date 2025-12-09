@@ -6,55 +6,55 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-// Material 3 Expressive color schemes
+// Vibrant Material 3 Expressive color schemes with enhanced colors
 private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFF6750A4),
+    primary = Color(0xFF7B5FFF),           // Vibrant purple
     onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFFEADDFF),
-    onPrimaryContainer = Color(0xFF21005D),
-    secondary = Color(0xFF625B71),
+    primaryContainer = Color(0xFFE8DBFF), // Lighter purple container
+    onPrimaryContainer = Color(0xFF2A0076),
+    secondary = Color(0xFFFF6B9D),        // Vibrant pink
     onSecondary = Color(0xFFFFFFFF),
-    secondaryContainer = Color(0xFFE8DEF8),
-    onSecondaryContainer = Color(0xFF1D192B),
-    tertiary = Color(0xFF7D5260),
+    secondaryContainer = Color(0xFFFFD9E5),
+    onSecondaryContainer = Color(0xFF3E001E),
+    tertiary = Color(0xFF00BFA5),         // Vibrant teal
     onTertiary = Color(0xFFFFFFFF),
-    tertiaryContainer = Color(0xFFFFD8E4),
-    onTertiaryContainer = Color(0xFF31111D),
-    error = Color(0xFFB3261E),
+    tertiaryContainer = Color(0xFFA7F3E4),
+    onTertiaryContainer = Color(0xFF003E33),
+    error = Color(0xFFFF5449),
     onError = Color(0xFFFFFFFF),
-    errorContainer = Color(0xFFF9DEDC),
-    onErrorContainer = Color(0xFF410E0B),
-    background = Color(0xFFFFFBFE),
+    errorContainer = Color(0xFFFFDAD6),
+    onErrorContainer = Color(0xFF410002),
+    background = Color(0xFFFFFBFF),
     onBackground = Color(0xFF1C1B1F),
-    surface = Color(0xFFFFFBFE),
+    surface = Color(0xFFFFFBFF),
     onSurface = Color(0xFF1C1B1F),
-    surfaceVariant = Color(0xFFE7E0EC),
-    onSurfaceVariant = Color(0xFF49454F),
+    surfaceVariant = Color(0xFFE6E0F0),
+    onSurfaceVariant = Color(0xFF48454E),
     outline = Color(0xFF79747E)
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFFD0BCFF),
-    onPrimary = Color(0xFF381E72),
-    primaryContainer = Color(0xFF4F378B),
-    onPrimaryContainer = Color(0xFFEADDFF),
-    secondary = Color(0xFFCCC2DC),
-    onSecondary = Color(0xFF332D41),
-    secondaryContainer = Color(0xFF4A4458),
-    onSecondaryContainer = Color(0xFFE8DEF8),
-    tertiary = Color(0xFFEFB8C8),
-    onTertiary = Color(0xFF492532),
-    tertiaryContainer = Color(0xFF633B48),
-    onTertiaryContainer = Color(0xFFFFD8E4),
-    error = Color(0xFFF2B8B5),
-    onError = Color(0xFF601410),
-    errorContainer = Color(0xFF8C1D18),
-    onErrorContainer = Color(0xFFF9DEDC),
+    primary = Color(0xFFBBA4FF),           // Bright purple
+    onPrimary = Color(0xFF3E2890),
+    primaryContainer = Color(0xFF5B3FD6),  // Rich purple container
+    onPrimaryContainer = Color(0xFFE8DBFF),
+    secondary = Color(0xFFFFB1CC),        // Bright pink
+    onSecondary = Color(0xFF5E1438),
+    secondaryContainer = Color(0xFF7D2B4F),
+    onSecondaryContainer = Color(0xFFFFD9E5),
+    tertiary = Color(0xFF4FDAC6),         // Bright teal
+    onTertiary = Color(0xFF00524A),
+    tertiaryContainer = Color(0xFF007368),
+    onTertiaryContainer = Color(0xFFA7F3E4),
+    error = Color(0xFFFFB4AB),
+    onError = Color(0xFF690005),
+    errorContainer = Color(0xFF93000A),
+    onErrorContainer = Color(0xFFFFDAD6),
     background = Color(0xFF1C1B1F),
     onBackground = Color(0xFFE6E1E5),
     surface = Color(0xFF1C1B1F),
     onSurface = Color(0xFFE6E1E5),
-    surfaceVariant = Color(0xFF49454F),
+    surfaceVariant = Color(0xFF48454E),
     onSurfaceVariant = Color(0xFFCAC4D0),
     outline = Color(0xFF938F99)
 )
