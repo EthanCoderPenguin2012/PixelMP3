@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.pixelmp3.mobile.ui.PixelMP3App
+import com.pixelmp3.mobile.ui.animations.AnimationSpec
 import com.pixelmp3.mobile.ui.theme.PixelMP3Theme
 
 class MainActivity : ComponentActivity() {
@@ -178,7 +179,7 @@ fun PermissionScreen(onRequestPermission: () -> Unit) {
                 
                 LaunchedEffect(buttonPressed) {
                     if (buttonPressed) {
-                        kotlinx.coroutines.delay(100)
+                        kotlinx.coroutines.delay(AnimationSpec.PRESS_ANIMATION_RESET_DELAY_MS)
                         buttonPressed = false
                     }
                 }

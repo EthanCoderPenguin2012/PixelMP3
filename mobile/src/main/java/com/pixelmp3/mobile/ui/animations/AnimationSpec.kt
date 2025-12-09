@@ -105,8 +105,13 @@ object AnimationSpec {
     /**
      * Spring-based Dp animation spec
      */
-    fun <T> bouncyDpSpring() = spring<Dp>(
+    fun bouncyDpSpring() = spring<Dp>(
         dampingRatio = Spring.DampingRatioMediumBouncy,
         stiffness = Spring.StiffnessLow
     )
+    
+    /**
+     * Duration for press state animations before reset
+     */
+    const val PRESS_ANIMATION_RESET_DELAY_MS = 100L
 }

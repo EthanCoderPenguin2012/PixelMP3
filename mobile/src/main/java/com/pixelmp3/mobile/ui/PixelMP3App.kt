@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.pixelmp3.mobile.ui.animations.AnimatedCard
 import com.pixelmp3.mobile.ui.animations.AnimationSpec
 import com.pixelmp3.mobile.ui.animations.SpinningIcon
+import com.pixelmp3.mobile.util.formatDuration
 import com.pixelmp3.shared.model.AudioFile
 import com.pixelmp3.shared.model.PlaybackState
 import kotlinx.coroutines.delay
@@ -247,7 +248,7 @@ fun AudioFileItem(audioFile: AudioFile) {
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = "${audioFile.duration / 1000 / 60}:${String.format("%02d", (audioFile.duration / 1000) % 60)}",
+                    text = formatDuration(audioFile.duration),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -267,7 +268,7 @@ fun AudioFileItem(audioFile: AudioFile) {
     // Reset press state after animation
     LaunchedEffect(isPressed) {
         if (isPressed) {
-            delay(100)
+            delay(AnimationSpec.PRESS_ANIMATION_RESET_DELAY_MS)
             isPressed = false
         }
     }
@@ -362,7 +363,7 @@ fun PlaylistsScreen() {
                 
                 LaunchedEffect(buttonPressed) {
                     if (buttonPressed) {
-                        delay(100)
+                        delay(AnimationSpec.PRESS_ANIMATION_RESET_DELAY_MS)
                         buttonPressed = false
                     }
                 }
@@ -462,7 +463,7 @@ fun WatchSyncScreen() {
                     
                     LaunchedEffect(syncButtonPressed) {
                         if (syncButtonPressed) {
-                            delay(100)
+                            delay(AnimationSpec.PRESS_ANIMATION_RESET_DELAY_MS)
                             syncButtonPressed = false
                         }
                     }
