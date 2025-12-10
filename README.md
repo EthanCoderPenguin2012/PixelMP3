@@ -5,7 +5,9 @@ An Android MP3 player app for mobile and Wear OS, built with Jetpack Compose and
 ## ✨ What Makes PixelMP3 Special
 
 ### Expressive Visual Design
+
 PixelMP3 showcases the future of mobile UI with:
+
 - 🌈 **Animated Gradients**: Multi-color gradients that flow continuously throughout the app
 - 💎 **Glassmorphism**: Semi-transparent surfaces with depth and layering
 - ✨ **Particle Effects**: Floating particles that create atmospheric, living interfaces
@@ -17,6 +19,7 @@ Every screen, every interaction, every moment is thoughtfully animated to create
 ## Features
 
 ### Mobile App
+
 - 🎵 **Massively Expressive UI** with Jetpack Compose and Material 3 Expressive design
 - ✨ Animated gradients throughout the entire app
 - 🌈 Glassmorphic surfaces with depth and layering
@@ -35,6 +38,7 @@ Every screen, every interaction, every moment is thoughtfully animated to create
 - 🔮 Advanced micro-interactions throughout
 
 ### Wear OS App
+
 - 🎧 Offline audio playback on your watch
 - 📲 Sync music from your phone
 - 🔋 Phone-less listening experience
@@ -52,7 +56,7 @@ The project is organized into three modules:
 
 - **Jetpack Compose**: Modern UI toolkit for Android
 - **Material 3 Expressive**: Latest Material Design with massively enhanced theming
-- **Advanced Animations**: 
+- **Advanced Animations**:
   - Gradient animations with continuous color shifts
   - Particle effects with physics-based motion
   - Spring-based bouncy animations for delightful interactions
@@ -66,6 +70,7 @@ The project is organized into three modules:
 ## Building the Project
 
 ### Prerequisites
+
 - Android Studio Hedgehog or later
 - Android SDK 34
 - Kotlin 1.9.20+
@@ -73,6 +78,7 @@ The project is organized into three modules:
 ### Build Instructions
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/EthanCoderPenguin2012/PixelMP3.git
    cd PixelMP3
@@ -117,18 +123,20 @@ See [ANIMATIONS.md](ANIMATIONS.md) and [UI_EXPRESSIVENESS.md](UI_EXPRESSIVENESS.
 
 ## Permissions
 
-### Mobile App
+### Mobile App Permissions
+
 - `READ_MEDIA_AUDIO` / `READ_EXTERNAL_STORAGE`: Access audio files
 - `FOREGROUND_SERVICE`: Background audio playback
 - `WAKE_LOCK`: Keep device awake during playback
 
-### Wear OS App
+### Wear OS App Permissions
+
 - `WAKE_LOCK`: Keep watch awake during playback
 - `VIBRATE`: Haptic feedback
 
 ## Project Structure
 
-```
+```dir
 PixelMP3/
 ├── mobile/                 # Android phone app
 │   └── src/main/
