@@ -1,0 +1,121 @@
+# PixelMP3 Traducción al Español (España)
+# Formato: clave=valor
+
+# App
+app_name=PixelMP3
+
+# Navigation
+nav_library=Biblioteca
+nav_albums=Álbumes
+nav_artists=Artistas
+nav_playlists=Listas de reproducción
+nav_search=Buscar
+nav_settings=Ajustes
+nav_watch=Reloj
+
+# Library
+library_title=Biblioteca de música
+library_all_songs=Todas las canciones
+library_empty=No se encontraron archivos de audio
+library_empty_desc=Agrega música a tu dispositivo para comenzar
+
+# Albums
+albums_title=Álbumes
+albums_empty=No se encontraron álbumes
+album_tracks=%d pistas
+
+# Artists
+artists_title=Artistas
+artists_empty=No se encontraron artistas
+artist_albums=%d álbumes
+artist_tracks=%d pistas
+
+# Playlists
+playlists_title=Listas de reproducción
+playlist_create=Crear lista de reproducción
+playlist_new=Nueva lista de reproducción
+playlist_edit=Editar lista de reproducción
+playlist_delete=Eliminar lista de reproducción
+playlist_name=Nombre de la lista de reproducción
+playlist_empty=Aún no hay listas de reproducción
+playlist_empty_desc=Crea tu primera lista de reproducción para organizar tu música
+
+# Playback
+playback_play=Reproducir
+playback_pause=Pausa
+playback_next=Siguiente
+playback_previous=Anterior
+playback_shuffle=Aleatorio
+playback_repeat=Repetir
+playback_now_playing=Reproduciendo ahora
+
+# Search
+search_title=Buscar
+search_hint=Buscar canciones, álbumes, artistas...
+search_songs=Canciones
+search_albums=Álbumes
+search_artists=Artistas
+search_playlists=Listas de reproducción
+search_no_results=No se encontraron resultados
+
+# Audio Effects
+effects_title=Efectos de audio
+effects_equalizer=Ecualizador
+effects_bass_boost=Amplificación de graves
+effects_surround=Sonido envolvente
+effects_preset=Preajuste
+effects_custom=Personalizado
+
+# Lyrics
+lyrics_title=Letras
+lyrics_none=No hay letras disponibles
+lyrics_edit=Editar letras
+lyrics_save=Guardar letras
+
+# Streaming
+streaming_title=Transmisión
+streaming_url=URL de transmisión
+streaming_add=Agregar transmisión
+streaming_connect=Conectar
+
+# Wear OS
+wear_sync=Sincronización Wear OS
+wear_sync_desc=Transferir música a tu reloj
+wear_transfer=Sincronizar música seleccionada
+wear_standalone=El reloj puede reproducir música de forma independiente
+
+# Settings
+settings_title=Ajustes
+settings_language=Idioma
+settings_theme=Tema
+settings_dynamic_color=Color dinámico
+settings_audio_quality=Calidad de audio
+
+# Common
+common_ok=Aceptar
+common_cancel=Cancelar
+common_delete=Eliminar
+common_edit=Editar
+common_save=Guardar
+common_add=Agregar
+common_close=Cerrar
+common_loading=Cargando...
+common_error=Error
+
+# Metadata
+metadata_title=Título
+metadata_artist=Artista
+metadata_album=Álbum
+metadata_year=Año
+metadata_genre=Género
+metadata_track=Número de pista
+
+# Permissions
+permission_required=Permiso requerido
+permission_audio=Se requiere permiso de audio para reproducir música
+permission_grant=Conceder permiso
+
+# Unknown
+unknown_artist=Artista desconocido
+unknown_album=Álbum desconocido
+unknown_genre=Género desconocido

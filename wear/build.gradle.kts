@@ -1,14 +1,15 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp") version "1.9.20-1.0.14"
 }
 
 android {
-    namespace = "com.pixelmp3.wear"
+    namespace = "com.ethanapps.pixelmp3.wear"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pixelmp3.wear"
+        applicationId = "com.ethanapps.pixelmp3.wear"
         minSdk = 30
         targetSdk = 34
         versionCode = 1
@@ -80,6 +81,11 @@ dependencies {
     
     // Wearable
     implementation("com.google.android.gms:play-services-wearable:18.1.0")
+    
+    // Database
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
     
     // Testing
     testImplementation("junit:junit:4.13.2")
