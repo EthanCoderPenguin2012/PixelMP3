@@ -1,0 +1,53 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: 'gradle'
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew build --stacktrace
+      
+    - name: Run tests
+      run: ./gradlew test --stacktrace
+      
+    - name: Upload mobile APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: mobile-apk
+        path: mobile/build/outputs/apk/debug/mobile-debug.apk
+        
+    - name: Upload wear APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: wear-apk
+        path: wear/build/outputs/apk/debug/wear-debug.apk
+        
+    - name: Upload test reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-reports
+        path: |
+          mobile/build/reports/tests/
+          wear/build/reports/tests/
+          shared/build/reports/tests/
