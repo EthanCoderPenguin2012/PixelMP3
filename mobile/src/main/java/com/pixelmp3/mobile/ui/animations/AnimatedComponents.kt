@@ -127,6 +127,12 @@ fun BouncyButton(
         animationSpec = AnimationSpec.fastBouncySpring,
         label = "button_scale"
     )
+
+    val rotation by animateFloatAsState(
+        targetValue = if (isPressed) -5f else 0f,
+        animationSpec = AnimationSpec.fastBouncySpring,
+        label = "button_rotation"
+    )
     
     Button(
         onClick = {
@@ -135,7 +141,7 @@ fun BouncyButton(
             // Reset after a short delay
             isPressed = false
         },
-        modifier = modifier.scale(scale),
+        modifier = modifier.scale(scale).rotate(rotation),
         enabled = enabled
     ) {
         content()

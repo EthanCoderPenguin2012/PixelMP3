@@ -66,13 +66,12 @@ dependencies {
     
     // Compose for Wear OS
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
-    implementation("androidx.wear.compose:compose-material:1.3.0")
+    implementation("androidx.wear.compose:compose-material3:1.0.0-alpha15")
     implementation("androidx.wear.compose:compose-foundation:1.3.0")
-    implementation("androidx.wear.compose:compose-navigation:1.3.0")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material:material-icons-core")
-    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.compose.material:material-icons-core:1.6.8")
+    implementation("androidx.compose.material:material-icons-extended:1.6.8")
     
     // Media
     implementation("androidx.media:media:1.7.0")

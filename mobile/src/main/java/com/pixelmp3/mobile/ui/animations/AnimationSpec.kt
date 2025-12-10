@@ -14,7 +14,7 @@ object AnimationSpec {
      * Bouncy spring animation for UI elements
      */
     val bouncySpring = spring<Float>(
-        dampingRatio = Spring.DampingRatioMediumBouncy,
+        dampingRatio = Spring.DampingRatioHighBouncy,
         stiffness = Spring.StiffnessLow
     )
     
@@ -30,8 +30,8 @@ object AnimationSpec {
      * Fast bouncy spring for interactive elements
      */
     val fastBouncySpring = spring<Float>(
-        dampingRatio = Spring.DampingRatioMediumBouncy,
-        stiffness = Spring.StiffnessMediumLow
+        dampingRatio = Spring.DampingRatioHighBouncy,
+        stiffness = Spring.StiffnessMedium
     )
     
     /**
@@ -106,7 +106,7 @@ object AnimationSpec {
      * Spring-based Dp animation spec
      */
     fun bouncyDpSpring() = spring<Dp>(
-        dampingRatio = Spring.DampingRatioMediumBouncy,
+        dampingRatio = Spring.DampingRatioHighBouncy,
         stiffness = Spring.StiffnessLow
     )
     

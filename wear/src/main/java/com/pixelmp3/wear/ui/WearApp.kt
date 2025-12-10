@@ -9,21 +9,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material.*
+import androidx.wear.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import com.pixelmp3.shared.model.AudioFile
+import com.pixelmp3.wear.ui.theme.PixelMP3WearTheme
 
 @Composable
 fun WearApp() {
-    MaterialTheme {
-        Scaffold(
-            timeText = {
-                TimeText()
-            }
-        ) {
-            MusicListScreen()
-        }
+    PixelMP3WearTheme {
+        MusicListScreen()
     }
 }
 
@@ -64,7 +59,8 @@ fun MusicListScreen() {
             ListHeader {
                 Text(
                     text = "PixelMP3",
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.displaySmall
                 )
             }
         }
@@ -79,12 +75,12 @@ fun MusicListScreen() {
                 ) {
                     Text(
                         text = "No music",
-                        style = MaterialTheme.typography.title3
+                        style = MaterialTheme.typography.titleMedium
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Sync from your phone",
-                        style = MaterialTheme.typography.body2,
+                        style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center
                     )
                 }
@@ -96,7 +92,7 @@ fun MusicListScreen() {
         }
         
         item {
-            Chip(
+            Button(
                 onClick = { /* TODO: Sync from phone */ },
                 label = {
                     Text(
@@ -105,7 +101,10 @@ fun MusicListScreen() {
                         overflow = TextOverflow.Ellipsis
                     )
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.secondary
+                )
             )
         }
     }
@@ -113,23 +112,37 @@ fun MusicListScreen() {
 
 @Composable
 fun WearAudioFileItem(audioFile: AudioFile) {
-    TitleCard(
+    Card(
         onClick = { /* TODO: Play audio */ },
-        title = {
-            Text(
-                text = audioFile.title,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     ) {
-        Text(
-            text = audioFile.artist,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.body2
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = audioFile.title,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = audioFile.artist,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            Icon(
+                imageVector = Icons.Filled.PlayArrow,
+                contentDescription = "Play",
+                modifier = Modifier.size(24.dp)
+            )
+        }
     }
 }
 
@@ -144,7 +157,7 @@ fun NowPlayingScreen(audioFile: AudioFile) {
     ) {
         Text(
             text = audioFile.title,
-            style = MaterialTheme.typography.title2,
+            style = MaterialTheme.typography.titleLarge,
             textAlign = TextAlign.Center,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
@@ -152,7 +165,7 @@ fun NowPlayingScreen(audioFile: AudioFile) {
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = audioFile.artist,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis

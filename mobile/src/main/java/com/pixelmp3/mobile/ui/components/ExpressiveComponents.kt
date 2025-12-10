@@ -132,7 +132,7 @@ fun ShimmerEffect(
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "shimmer")
     
-    val offset by infiniteTransition.animateFloat(
+    val shimmerOffset by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1000f,
         animationSpec = infiniteRepeatable(
@@ -148,8 +148,8 @@ fun ShimmerEffect(
             highlightColor,
             baseColor
         ),
-        start = Offset(offset, offset),
-        end = Offset(offset + 200f, offset + 200f)
+        start = Offset(shimmerOffset, shimmerOffset),
+        end = Offset(shimmerOffset + 200f, shimmerOffset + 200f)
     )
     
     Box(
@@ -175,7 +175,7 @@ fun WaveBackground(
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "wave")
     
-    val offset by infiniteTransition.animateFloat(
+    val waveOffset by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
@@ -190,7 +190,9 @@ fun WaveBackground(
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = colors
+                    colors = colors,
+                    startY = waveOffset,
+                    endY = waveOffset + 1000f
                 )
             )
     )

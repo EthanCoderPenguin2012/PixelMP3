@@ -40,7 +40,6 @@ fun NowPlayingBar(
     onPlayPauseClick: () -> Unit,
     onNextClick: () -> Unit,
     onPreviousClick: () -> Unit,
-    onSeek: (Long) -> Unit,
     onExpandClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -68,7 +67,6 @@ fun NowPlayingBar(
                 onPlayPauseClick = onPlayPauseClick,
                 onNextClick = onNextClick,
                 onPreviousClick = onPreviousClick,
-                onSeek = onSeek,
                 onExpandClick = onExpandClick
             )
         }
@@ -83,7 +81,6 @@ private fun NowPlayingBarContent(
     onPlayPauseClick: () -> Unit,
     onNextClick: () -> Unit,
     onPreviousClick: () -> Unit,
-    onSeek: (Long) -> Unit,
     onExpandClick: () -> Unit
 ) {
     // Animated gradient background

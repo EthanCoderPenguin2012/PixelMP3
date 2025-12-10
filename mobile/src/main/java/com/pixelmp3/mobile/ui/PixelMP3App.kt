@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pixelmp3.mobile.player.PlaybackManager
 import com.pixelmp3.mobile.ui.animations.AnimatedCard
 import com.pixelmp3.mobile.ui.animations.AnimationSpec
+import com.pixelmp3.mobile.ui.animations.MorphingAnimation
 import com.pixelmp3.mobile.ui.animations.SpinningIcon
 import com.pixelmp3.mobile.ui.components.BouncingDotsLoader
 import com.pixelmp3.mobile.ui.components.GradientCard
@@ -36,6 +38,7 @@ import com.pixelmp3.mobile.viewmodel.AudioViewModel
 import com.pixelmp3.shared.model.AudioFile
 import com.pixelmp3.shared.model.PlaybackState
 import kotlinx.coroutines.delay
+import com.pixelmp3.mobile.ui.animations.MorphingAnimation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -381,6 +384,8 @@ fun AudioFileItem(audioFile: AudioFile, onPlay: () -> Unit) {
     }
 }
 
+// ...
+
 @Composable
 fun PlaylistsScreen() {
     var visible by remember { mutableStateOf(false) }
@@ -416,58 +421,10 @@ fun PlaylistsScreen() {
                         particleCount = 8
                     )
                     
-                    val infiniteTransition = rememberInfiniteTransition(label = "playlist_pulse")
-                    
-                    val scale by infiniteTransition.animateFloat(
-                        initialValue = 1f,
-                        targetValue = 1.15f,
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(1500, easing = FastOutSlowInEasing),
-                            repeatMode = RepeatMode.Reverse
-                        ),
-                        label = "icon_pulse"
+                    MorphingAnimation(
+                        modifier = Modifier.size(120.dp),
+                        color = MaterialTheme.colorScheme.primary
                     )
-                    
-                    val gradientOffset by infiniteTransition.animateFloat(
-                        initialValue = 0f,
-                        targetValue = 1000f,
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(6000, easing = LinearEasing),
-                            repeatMode = RepeatMode.Reverse
-                        ),
-                        label = "gradient_offset"
-                    )
-                    
-                    Surface(
-                        modifier = Modifier
-                            .size(120.dp)
-                            .scale(scale),
-                        shape = MaterialTheme.shapes.extraLarge,
-                        color = Color.Transparent,
-                        tonalElevation = 6.dp
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.background(
-                                brush = Brush.linearGradient(
-                                    colors = listOf(
-                                        MaterialTheme.colorScheme.primaryContainer,
-                                        MaterialTheme.colorScheme.secondaryContainer,
-                                        MaterialTheme.colorScheme.tertiaryContainer
-                                    ),
-                                    start = androidx.compose.ui.geometry.Offset(gradientOffset, gradientOffset),
-                                    end = androidx.compose.ui.geometry.Offset(gradientOffset + 500f, gradientOffset + 500f)
-                                )
-                            )
-                        ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.PlaylistPlay,
-                                contentDescription = null,
-                                modifier = Modifier.size(64.dp),
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
                 }
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(
@@ -665,26 +622,6 @@ fun InfoCard(
     title: String,
     description: String
 ) {
-    var isHovered by remember { mutableStateOf(false) }
-    
-    val elevation by animateDpAsState(
-        targetValue = if (isHovered) 6.dp else 2.dp,
-        animationSpec = AnimationSpec.bouncyDpSpring(),
-        label = "info_card_elevation"
-    )
-    
-    // Animated gradient for icon
-    val infiniteTransition = rememberInfiniteTransition(label = "info_icon_gradient")
-    val iconRotation by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 360f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(8000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "icon_rotation"
-    )
-    
     GlassmorphicCard(
         modifier = Modifier.fillMaxWidth(),
         backgroundColor = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.9f)

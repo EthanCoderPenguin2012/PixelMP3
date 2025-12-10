@@ -2,110 +2,115 @@ package com.pixelmp3.mobile.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-/**
- * Expressive typography with enhanced font sizes and weights
- */
+// Expressive Material 3 typography with a more playful and dynamic feel
 val ExpressiveTypography = Typography(
-    // Display styles - largest, most impactful
     displayLarge = TextStyle(
-        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.Cursive,
+        fontWeight = FontWeight.W900,
         fontSize = 57.sp,
         lineHeight = 64.sp,
-        letterSpacing = (-0.25).sp
+        letterSpacing = (-0.25).sp,
     ),
     displayMedium = TextStyle(
-        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.Cursive,
+        fontWeight = FontWeight.W800,
         fontSize = 45.sp,
         lineHeight = 52.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
     ),
     displaySmall = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontFamily = FontFamily.Cursive,
+        fontWeight = FontWeight.W700,
         fontSize = 36.sp,
         lineHeight = 44.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
     ),
-    
-    // Headline styles - for screen titles and important content
     headlineLarge = TextStyle(
-        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.W600,
         fontSize = 32.sp,
         lineHeight = 40.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
     ),
     headlineMedium = TextStyle(
-        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.W600,
         fontSize = 28.sp,
         lineHeight = 36.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
     ),
     headlineSmall = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.W600,
         fontSize = 24.sp,
         lineHeight = 32.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
     ),
-    
-    // Title styles - for card titles and section headers
     titleLarge = TextStyle(
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp,
         lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
     ),
     titleMedium = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
         lineHeight = 24.sp,
-        letterSpacing = 0.15.sp
+        letterSpacing = 0.15.sp,
     ),
     titleSmall = TextStyle(
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         lineHeight = 20.sp,
-        letterSpacing = 0.1.sp
+        letterSpacing = 0.1.sp,
     ),
-    
-    // Body styles - for main content
     bodyLarge = TextStyle(
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.5.sp,
     ),
     bodyMedium = TextStyle(
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         lineHeight = 20.sp,
-        letterSpacing = 0.25.sp
+        letterSpacing = 0.25.sp,
     ),
     bodySmall = TextStyle(
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         lineHeight = 16.sp,
-        letterSpacing = 0.4.sp
+        letterSpacing = 0.4.sp,
     ),
-    
-    // Label styles - for buttons and small labels
     labelLarge = TextStyle(
-        fontWeight = FontWeight.SemiBold,
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
         lineHeight = 20.sp,
-        letterSpacing = 0.1.sp
+        letterSpacing = 0.1.sp,
     ),
     labelMedium = TextStyle(
-        fontWeight = FontWeight.Medium,
+        fontFamily = FontFamily.Default,
+        fontWeight =  FontWeight.Medium,
         fontSize = 12.sp,
         lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.5.sp,
     ),
     labelSmall = TextStyle(
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Medium,
         fontSize = 11.sp,
         lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.5.sp,
     )
 )
