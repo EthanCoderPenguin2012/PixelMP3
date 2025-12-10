@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.pixelmp3.wear"
+    namespace = "com.ethanapps.pixelmp3.wear"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pixelmp3.wear"
+        applicationId = "com.ethanapps.pixelmp3.wear"
         minSdk = 30
         targetSdk = 34
         versionCode = 1

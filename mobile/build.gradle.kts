@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.pixelmp3.mobile"
+    namespace = "com.ethanapps.pixelmp3.mobile"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.pixelmp3.mobile"
+        applicationId = "com.ethanapps.pixelmp3"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

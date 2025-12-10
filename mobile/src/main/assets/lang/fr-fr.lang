@@ -1,0 +1,121 @@
+# PixelMP3 Traduction Française (France)
+# Format: clé=valeur
+
+# App
+app_name=PixelMP3
+
+# Navigation
+nav_library=Bibliothèque
+nav_albums=Albums
+nav_artists=Artistes
+nav_playlists=Listes de lecture
+nav_search=Rechercher
+nav_settings=Paramètres
+nav_watch=Montre
+
+# Library
+library_title=Bibliothèque musicale
+library_all_songs=Toutes les chansons
+library_empty=Aucun fichier audio trouvé
+library_empty_desc=Ajoutez de la musique à votre appareil pour commencer
+
+# Albums
+albums_title=Albums
+albums_empty=Aucun album trouvé
+album_tracks=%d pistes
+
+# Artists
+artists_title=Artistes
+artists_empty=Aucun artiste trouvé
+artist_albums=%d albums
+artist_tracks=%d pistes
+
+# Playlists
+playlists_title=Listes de lecture
+playlist_create=Créer une liste de lecture
+playlist_new=Nouvelle liste de lecture
+playlist_edit=Modifier la liste de lecture
+playlist_delete=Supprimer la liste de lecture
+playlist_name=Nom de la liste de lecture
+playlist_empty=Aucune liste de lecture pour le moment
+playlist_empty_desc=Créez votre première liste de lecture pour organiser votre musique
+
+# Playback
+playback_play=Lecture
+playback_pause=Pause
+playback_next=Suivant
+playback_previous=Précédent
+playback_shuffle=Aléatoire
+playback_repeat=Répéter
+playback_now_playing=En cours de lecture
+
+# Search
+search_title=Recherche
+search_hint=Rechercher des chansons, albums, artistes...
+search_songs=Chansons
+search_albums=Albums
+search_artists=Artistes
+search_playlists=Listes de lecture
+search_no_results=Aucun résultat trouvé
+
+# Audio Effects
+effects_title=Effets audio
+effects_equalizer=Égaliseur
+effects_bass_boost=Amplification des basses
+effects_surround=Son surround
+effects_preset=Préréglage
+effects_custom=Personnalisé
+
+# Lyrics
+lyrics_title=Paroles
+lyrics_none=Aucune parole disponible
+lyrics_edit=Modifier les paroles
+lyrics_save=Enregistrer les paroles
+
+# Streaming
+streaming_title=Streaming
+streaming_url=URL du flux
+streaming_add=Ajouter un flux
+streaming_connect=Connecter
+
+# Wear OS
+wear_sync=Synchronisation Wear OS
+wear_sync_desc=Transférer de la musique vers votre montre
+wear_transfer=Synchroniser la musique sélectionnée
+wear_standalone=La montre peut lire de la musique de manière indépendante
+
+# Settings
+settings_title=Paramètres
+settings_language=Langue
+settings_theme=Thème
+settings_dynamic_color=Couleur dynamique
+settings_audio_quality=Qualité audio
+
+# Common
+common_ok=OK
+common_cancel=Annuler
+common_delete=Supprimer
+common_edit=Modifier
+common_save=Enregistrer
+common_add=Ajouter
+common_close=Fermer
+common_loading=Chargement...
+common_error=Erreur
+
+# Metadata
+metadata_title=Titre
+metadata_artist=Artiste
+metadata_album=Album
+metadata_year=Année
+metadata_genre=Genre
+metadata_track=Numéro de piste
+
+# Permissions
+permission_required=Permission requise
+permission_audio=L'autorisation audio est requise pour lire de la musique
+permission_grant=Accorder l'autorisation
+
+# Unknown
+unknown_artist=Artiste inconnu
+unknown_album=Album inconnu
+unknown_genre=Genre inconnu

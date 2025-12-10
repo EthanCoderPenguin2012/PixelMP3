@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.pixelmp3.shared"
+    namespace = "com.ethanapps.pixelmp3.shared"
     compileSdk = 34
 
     defaultConfig {

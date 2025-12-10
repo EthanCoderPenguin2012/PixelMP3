@@ -1,0 +1,121 @@
+# PixelMP3 English (United States) Translation
+# Format: key=value
+
+# App
+app_name=PixelMP3
+
+# Navigation
+nav_library=Library
+nav_albums=Albums
+nav_artists=Artists
+nav_playlists=Playlists
+nav_search=Search
+nav_settings=Settings
+nav_watch=Watch
+
+# Library
+library_title=Music Library
+library_all_songs=All Songs
+library_empty=No audio files found
+library_empty_desc=Add some music to your device to get started
+
+# Albums
+albums_title=Albums
+albums_empty=No albums found
+album_tracks=%d tracks
+
+# Artists
+artists_title=Artists
+artists_empty=No artists found
+artist_albums=%d albums
+artist_tracks=%d tracks
+
+# Playlists
+playlists_title=Playlists
+playlist_create=Create Playlist
+playlist_new=New Playlist
+playlist_edit=Edit Playlist
+playlist_delete=Delete Playlist
+playlist_name=Playlist Name
+playlist_empty=No playlists yet
+playlist_empty_desc=Create your first playlist to organize your music
+
+# Playback
+playback_play=Play
+playback_pause=Pause
+playback_next=Next
+playback_previous=Previous
+playback_shuffle=Shuffle
+playback_repeat=Repeat
+playback_now_playing=Now Playing
+
+# Search
+search_title=Search
+search_hint=Search songs, albums, artists...
+search_songs=Songs
+search_albums=Albums
+search_artists=Artists
+search_playlists=Playlists
+search_no_results=No results found
+
+# Audio Effects
+effects_title=Audio Effects
+effects_equalizer=Equalizer
+effects_bass_boost=Bass Boost
+effects_surround=Surround Sound
+effects_preset=Preset
+effects_custom=Custom
+
+# Lyrics
+lyrics_title=Lyrics
+lyrics_none=No lyrics available
+lyrics_edit=Edit Lyrics
+lyrics_save=Save Lyrics
+
+# Streaming
+streaming_title=Streaming
+streaming_url=Stream URL
+streaming_add=Add Stream
+streaming_connect=Connect
+
+# Wear OS
+wear_sync=Wear OS Sync
+wear_sync_desc=Transfer music to your watch
+wear_transfer=Sync Selected Music
+wear_standalone=Watch can play music independently
+
+# Settings
+settings_title=Settings
+settings_language=Language
+settings_theme=Theme
+settings_dynamic_color=Dynamic Color
+settings_audio_quality=Audio Quality
+
+# Common
+common_ok=OK
+common_cancel=Cancel
+common_delete=Delete
+common_edit=Edit
+common_save=Save
+common_add=Add
+common_close=Close
+common_loading=Loading...
+common_error=Error
+
+# Metadata
+metadata_title=Title
+metadata_artist=Artist
+metadata_album=Album
+metadata_year=Year
+metadata_genre=Genre
+metadata_track=Track Number
+
+# Permissions
+permission_required=Permission Required
+permission_audio=Audio permission is required to play music
+permission_grant=Grant Permission
+
+# Unknown
+unknown_artist=Unknown Artist
+unknown_album=Unknown Album
+unknown_genre=Unknown Genre
